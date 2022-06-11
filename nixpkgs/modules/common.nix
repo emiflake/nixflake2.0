@@ -12,4 +12,6 @@
     docker
     coreutils
   ];
+
+  programs.htop.enable = true;
 }
