@@ -46,12 +46,14 @@
     initExtra = ''
       bindkey -v
     '';
-    shellAliases = let
-      exa = "${pkgs.exa}/bin/exa";
-    in {
-      ls = exa;
-      ll = exa;
-      dani = "echo dani is cute";
-    };
+    shellAliases =
+      let
+        exa = "${pkgs.exa}/bin/exa";
+      in
+      {
+        ls = exa;
+        ll = exa;
+        dani = "echo dani is cute";
+      };
   };
 }
