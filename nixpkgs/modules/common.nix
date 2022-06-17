@@ -11,6 +11,7 @@
     bash
     docker
     coreutils
+    ripgrep
   ];
 
   programs.htop.enable = true;

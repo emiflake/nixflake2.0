@@ -48,7 +48,6 @@
     '';
     shellAliases = let
       exa = "${pkgs.exa}/bin/exa";
-      nvim = "${pkgs.neovim}/bin/nvim";
     in {
       ls = exa;
       ll = exa;

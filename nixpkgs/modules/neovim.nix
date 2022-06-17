@@ -1,5 +1,6 @@
-{ config, pkgs, libs, ... }:
-{     
+{ config, pkgs, libs, inputs, system, ... }:
+
+{
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -9,9 +10,11 @@
     package = pkgs.neovim-unwrapped;
     plugins = with pkgs.vimPlugins; [
       yankring
+      nvim-lspconfig
       vim-nix
       ctrlp
-      { plugin = onedark-vim;
+      {
+        plugin = onedark-vim;
         config = ''
           colo onedark
         '';
@@ -20,11 +23,20 @@
       gitgutter
       fugitive
       airline
-      { plugin = vim-airline;
+      {
+        plugin = vim-airline;
         config = ''
           let g:airline#extensions#tabline#enabled = 1
           let g:airline_left_sep = ''
           let g:airline_right_sep = ''
+        '';
+      }
+      {
+        plugin = vim-ormolu;
+        config = ''
+          let g:ormolu_command="fourmolu"
+          let g:ormolu_options=["-o -XTypeApplications -XOverloadedRecordDot"]
+          let g:ormolu_suppress_stderr=1
         '';
       }
       vim-airline-themes
@@ -38,7 +50,15 @@
         "suggest.enablePreview" = true;
         "suggest.enablePreselect" = false;
         "suggest.disableKind" = true;
+        "coc.preferences.formatOnSaveFiletypes" = [ "nix" ];
+
         languageserver = {
+          nix = {
+            command = "${inputs.rnix-lsp.defaultPackage.${system}}/bin/rnix-lsp";
+            filetypes = [
+              "nix"
+            ];
+          };
           haskell = {
             command = "haskell-language-server";
             args = [ "--lsp" ];
@@ -56,15 +76,18 @@
     };
 
     extraConfig = ''
-       let mapleader=","
-       set termguicolors
-       set t_Co=256
-       set number
-       set mouse=a
-       set clipboard+=unnamedplus
-       set tabstop=4
-       set shiftwidth=4
-       set expandtab
+      let mapleader=","
+      set termguicolors
+      set t_Co=256
+      set number
+      set mouse=a
+      set clipboard+=unnamedplus
+      set tabstop=4
+      set shiftwidth=4
+      set expandtab
+
+      vmap <leader>ca <Plug>(coc-codeaction-selected)
+      nmap <leader>ca <Plug>(coc-codeaction-cursor)
     '';
   };
 }
