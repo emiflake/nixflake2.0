@@ -3,16 +3,12 @@ let
   spectacle = "${pkgs.spectacle}/bin/spectacle";
 in
 {
-  imports = [
-    ./user-options
-  ];
-
   services.sxhkd = {
     enable = true;
     keybindings = {
-      "super + Return" = config.user-options.packages.terminal;
-      "super + b" = config.user-options.packages.browser;
-      "super + e" = "${pkgs.emacs}/bin/emacs";
+      "super + Return" = "${config.programs.kitty.package}/bin/kitty";
+      "super + b" = "${config.programs.firefox.package}/bin/firefox";
+      "super + e" = "${config.programs.emacs.package}/bin/emacs";
       "super + space" = "${pkgs.rofi}/bin/rofi -show run";
 
       "ctrl + shift + 2" = "${spectacle} -tcb";

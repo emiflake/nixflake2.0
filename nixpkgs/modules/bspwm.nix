@@ -3,7 +3,7 @@
 {
   xsession = {
     enable = true;
-    windowManager.command = "${config.xsession.windowManager.bspwm.package}/bin/bspwm";
+    # windowManager.command = "${config.xsession.windowManager.bspwm.package}/bin/bspwm";
   };
 
   home.packages = [ config.xsession.windowManager.bspwm.package ];

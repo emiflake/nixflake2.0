@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     nixpkgs-latest.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-21_11.url = "github:NixOS/nixpkgs/21.11";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
@@ -19,6 +20,7 @@
           system = "x86_64-linux";
           homeDirectory = "/home/emiflake";
           username = "emiflake";
+          pkgs = import inputs.nixpkgs { localSystem = system; };
           extraSpecialArgs = { inherit inputs system; };
           configuration.imports = [
             ./modules/home-manager.nix

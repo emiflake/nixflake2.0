@@ -34,10 +34,6 @@
         };
       }
     ];
-    sessionVariables = {
-      EDITOR = "${pkgs.neovim}/bin/nvim";
-      TERM = "xterm";
-    };
     oh-my-zsh = {
       enable = true;
       theme = "refined";
@@ -45,6 +41,8 @@
     };
     initExtra = ''
       bindkey -v
+      export EDITOR=${pkgs.neovim}/bin/nvim
+      export TERM=xterm
     '';
     shellAliases =
       let

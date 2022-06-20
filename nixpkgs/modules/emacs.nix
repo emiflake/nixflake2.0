@@ -184,10 +184,10 @@
 
   home.file.".doom.d/config.el".text = ''
     ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-    (setq doom-font (font-spec :family "PragmataPro Mono Liga" :size 12 :weight 'medium))
+    (setq doom-font (font-spec :family "PragmataPro Mono Liga" :size 24 :weight 'medium))
 
     (setq lsp-haskell-server-path "haskell-language-server")
-    (setq haskell-process-args-cabal-repl '("agora-test"))
+    ;;; (setq haskell-process-args-cabal-repl '("agora-test"))
 
     (defun hm-switch ()
       (shell-command "cd ~/.config/")

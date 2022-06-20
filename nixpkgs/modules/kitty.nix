@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  config.programs.kitty =
+  programs.kitty =
     {
       enable = true;
       font.name = "PragmataPro Mono Liga";
@@ -8,6 +8,7 @@
       settings = {
         font_size = 18;
         window_padding_width = 20;
+        confirm_os_window_close = 0;
         enable_audio_bell = false;
       };
 
