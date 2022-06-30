@@ -17,12 +17,16 @@
     {
       homeConfigurations = {
         nixflake = inputs.home-manager.lib.homeManagerConfiguration rec {
-          system = "x86_64-linux";
-          homeDirectory = "/home/emiflake";
-          username = "emiflake";
-          pkgs = import inputs.nixpkgs { localSystem = system; };
-          extraSpecialArgs = { inherit inputs system; };
-          configuration.imports = [
+          pkgs = import inputs.nixpkgs { localSystem = "x86_64-linux"; };
+          extraSpecialArgs = { inherit inputs; system = "x86_64-linux"; };
+          modules = [
+            {
+              home = {
+                homeDirectory = "/home/emiflake";
+                username = "emiflake";
+                stateVersion = "22.11";
+              };
+            }
             ./modules/home-manager.nix
             ./modules/common.nix
             ./modules/zsh.nix
@@ -37,11 +41,16 @@
           ];
         };
         fidelity = inputs.home-manager.lib.homeManagerConfiguration rec {
-          system = "aarch64-darwin";
-          homeDirectory = "/Users/emiflake";
-          username = "emiflake";
-          extraSpecialArgs = { inherit inputs system; };
-          configuration.imports = [
+          pkgs = import inputs.nixpkgs { localSystem = "aarch64-darwin"; };
+          extraSpecialArgs = { inherit inputs; system = "aarch64-darwin"; };
+          modules = [
+            {
+              home = {
+                homeDirectory = "/Users/emiflake";
+                username = "emiflake";
+                stateVersion = "22.11";
+              };
+            }
             inputs.nix-doom-emacs.hmModule
             ./modules/home-manager.nix
             ./modules/common.nix
