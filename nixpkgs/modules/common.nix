@@ -12,6 +12,7 @@
     docker
     coreutils
     ripgrep
+    nix
   ];
 
   home.file = {
