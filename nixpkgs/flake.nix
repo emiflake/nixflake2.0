@@ -40,6 +40,26 @@
             ./modules/emacs.nix
           ];
         };
+        bbu = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs { localSystem = "x86_64-linux"; };
+          extraSpecialArgs = { inherit inputs; system = "x86_64-linux"; };
+          modules = [
+            {
+              home = {
+                homeDirectory = "/home/emiflake";
+                username = "emiflake";
+                stateVersion = "22.11";
+              };
+            }
+            ./modules/home-manager.nix
+            ./modules/common.nix
+            ./modules/zsh.nix
+            ./modules/neovim.nix
+            ./modules/git.nix
+            ./modules/nixpkgs.nix
+            ./modules/user-theme
+          ];
+        };
         fidelity = inputs.home-manager.lib.homeManagerConfiguration rec {
           pkgs = import inputs.nixpkgs { localSystem = "aarch64-darwin"; };
           extraSpecialArgs = { inherit inputs; system = "aarch64-darwin"; };
