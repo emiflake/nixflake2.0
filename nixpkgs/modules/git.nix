@@ -20,7 +20,7 @@ let
         ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       };
 
-      user.signingKey = "${builtins.readFile ~/.ssh/id_ed25519.pub}";
+      # user.signingKey = "${builtins.readFile ~/.ssh/id_ed25519.pub}";
 
       commit.gpgsign = true;
     } else { });

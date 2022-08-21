@@ -35,7 +35,7 @@
         plugin = vim-ormolu;
         config = ''
           let g:ormolu_command="fourmolu"
-          let g:ormolu_options=["-o -XTypeApplications -XOverloadedRecordDot"]
+          let g:ormolu_options=["-o -XTypeApplications -o -XOverloadedRecordDot"]
           let g:ormolu_suppress_stderr=1
         '';
       }
