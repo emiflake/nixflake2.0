@@ -40,6 +40,7 @@
       plugins = [ "git" ];
     };
     initExtra = ''
+      ZSH_DISABLE_COMPFIX="true"
       bindkey -v
       export EDITOR=${pkgs.neovim}/bin/nvim
       export TERM=xterm

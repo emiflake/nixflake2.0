@@ -16,6 +16,7 @@ in
             red:        ${theme.red};
             blue:       ${theme.blue};
             cyan:       ${theme.cyan};
+            purple:     ${theme.magenta};
             emphasis:   ${theme.base0};
             text:       ${theme.fg};
             text-alt:   ${theme.fg};
@@ -44,7 +45,7 @@ in
           }
 
           prompt {
-            text-color: #dfdfdf;
+            text-color: @text;
           }
 
           textbox-prompt-colon {
@@ -80,7 +81,7 @@ in
           }
 
           element active, element selected active {
-            text-color: @purple;
+            text-color: @emphasis;
           }
 
           message {

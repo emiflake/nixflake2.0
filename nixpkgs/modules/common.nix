@@ -13,6 +13,7 @@
     coreutils
     ripgrep
     nix
+    github-cli
   ];
 
   home.file = {

@@ -19,6 +19,7 @@
           colo onedark
         '';
       }
+      dhall-vim
       vim-nix
       gitgutter
       fugitive
@@ -59,6 +60,12 @@
               "nix"
             ];
           };
+          dhall = {
+            command = "dhall-lsp-server";
+            filetypes = [
+              "dhall"
+            ];
+          };
           haskell = {
             command = "haskell-language-server";
             args = [ "--lsp" ];
@@ -88,6 +95,9 @@
 
       vmap <leader>ca <Plug>(coc-codeaction-selected)
       nmap <leader>ca <Plug>(coc-codeaction-cursor)
+
+      " autocmd BufWritePre <buffer> call CocActionAsync('format')
+      command! -nargs=0 Format :call CocActionAsync('format')
     '';
   };
 }
