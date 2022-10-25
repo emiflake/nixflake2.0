@@ -37,7 +37,7 @@
       ${pkgs.feh}/bin/feh --bg-fill "${../assets/doom-themed-wallpaper-red.png}" &
       ${config.services.polybar.package}/bin/polybar default &
       # This version actually works :)
-      ${(import inputs.nixpkgs-21_11 { localSystem = system; }).picom}/bin/picom --shadow --vsync &
+      ${pkgs.picom}/bin/picom --shadow --vsync &
       sleep 1 && sh ${bspwmrc} &
       exec ${config.xsession.windowManager.bspwm.package}/bin/bspwm
     '';

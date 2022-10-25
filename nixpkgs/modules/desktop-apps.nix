@@ -1,11 +1,11 @@
 # This module is responsible for desktop apps
 { config, pkgs, inputs, ... }:
 let custom-discord =
-  pkgs.discord.overrideAttrs (_: {
-    version = "0.0.20";
+  pkgs.discord.overrideAttrs (_: rec {
+    version = "0.0.21";
     src = builtins.fetchTarball {
-      url = "https://dl.discordapp.net/apps/linux/0.0.20/discord-0.0.20.tar.gz";
-      sha256 = "0qaczvp79b4gzzafgc5ynp6h4nd2ppvndmj6pcs1zys3c0hrabpv";
+      url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
+      sha256 = "1pw9q4290yn62xisbkc7a7ckb1sa5acp91plp2mfpg7gp7v60zvz";
     };
   });
 in
@@ -26,5 +26,6 @@ in
       pavucontrol
       vlc
       audacity
+      libreoffice
     ];
 }

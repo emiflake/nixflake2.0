@@ -16,6 +16,32 @@
   outputs = inputs:
     {
       homeConfigurations = {
+        nextflake = inputs.home-manager.lib.homeManagerConfiguration rec {
+          pkgs = import inputs.nixpkgs { localSystem = "x86_64-linux"; };
+          extraSpecialArgs = { inherit inputs; system = "x86_64-linux"; };
+          modules = [
+            {
+              home = {
+                homeDirectory = "/home/emi";
+                username = "emi";
+                stateVersion = "22.11";
+              };
+            }
+            ./modules/home-manager.nix
+            ./modules/common.nix
+            ./modules/zsh.nix
+            ./modules/neovim.nix
+            ./modules/git.nix
+            ./modules/kitty.nix
+            ./modules/de.nix
+            ./modules/desktop-apps.nix
+            ./modules/nixpkgs.nix
+            ./modules/user-theme
+            ./modules/emacs.nix
+          ];
+        };
+
+        # Legacy system. No longer used
         nixflake = inputs.home-manager.lib.homeManagerConfiguration rec {
           pkgs = import inputs.nixpkgs { localSystem = "x86_64-linux"; };
           extraSpecialArgs = { inherit inputs; system = "x86_64-linux"; };
