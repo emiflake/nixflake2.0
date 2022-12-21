@@ -15,6 +15,7 @@
     nix
     github-cli
     file
+    cachix
   ];
 
   home.file = {

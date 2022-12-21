@@ -1,5 +1,5 @@
 # This module is responsible for desktop apps
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, system, ... }:
 let custom-discord =
   pkgs.discord.overrideAttrs (_: rec {
     version = "0.0.21";
@@ -19,9 +19,8 @@ in
       slack
       spotify
       steam
-      polymc
       yubikey-personalization-gui
-      yubioath-desktop
+      (import inputs.nixpkgs-pin1 { inherit system; }).yubioath-desktop
       ledger-live-desktop
       pavucontrol
       vlc

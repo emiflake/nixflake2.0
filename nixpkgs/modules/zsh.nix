@@ -52,7 +52,9 @@
       {
         ls = exa;
         ll = exa;
-        dani = "echo dani is cute";
+        n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
+        nm = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/master.zip -p";
+        nr = "nix run";
       };
   };
 }
