@@ -3,5 +3,6 @@
 !nix
 !nixpkgs
 !.gitignore
+!README.md
 
 netrc
