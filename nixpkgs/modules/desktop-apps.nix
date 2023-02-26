@@ -18,7 +18,6 @@ in
       custom-discord
       slack
       spotify
-      steam
       yubikey-personalization-gui
       (import inputs.nixpkgs-pin1 { inherit system; }).yubioath-desktop
       ledger-live-desktop
@@ -26,5 +25,9 @@ in
       vlc
       audacity
       libreoffice
+
+      steam
+      xonotic
+      (import ../cpma.nix { inherit pkgs; })
     ];
 }
