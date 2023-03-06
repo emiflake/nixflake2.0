@@ -2,10 +2,10 @@
 { config, pkgs, inputs, system, ... }:
 let custom-discord =
   pkgs.discord.overrideAttrs (_: rec {
-    version = "0.0.21";
+    version = "0.0.22";
     src = builtins.fetchTarball {
       url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-      sha256 = "1pw9q4290yn62xisbkc7a7ckb1sa5acp91plp2mfpg7gp7v60zvz";
+      sha256 = "1z980p3zmwmy29cdz2v8c36ywrybr7saw8n0w7wlb74m63zb9gpi";
     };
   });
 in
