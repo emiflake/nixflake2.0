@@ -20,7 +20,7 @@
 
   home.file = {
     ".ghci".text = ''
-      :set prompt "λ> "
+      :set prompt ">λ= "
       :set +s
     '';
 
