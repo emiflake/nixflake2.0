@@ -13,9 +13,12 @@
     coreutils
     ripgrep
     nix
+    fzf
     github-cli
     file
     cachix
+    notmuch
+    offlineimap
   ];
 
   home.file = {
