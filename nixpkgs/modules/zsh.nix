@@ -47,11 +47,11 @@
     '';
     shellAliases =
       let
-        exa = "${pkgs.exa}/bin/exa";
+        eza = "${pkgs.eza}/bin/eza";
       in
       {
-        ls = exa;
-        ll = exa;
+        ls = eza;
+        ll = eza;
         n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
         nm = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/master.zip -p";
         nr = "nix run";

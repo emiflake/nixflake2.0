@@ -1,4 +1,4 @@
-{ config, pkgs, libs, ... }: {
+{ config, pkgs, inputs, libs, ... }: {
   # https://github.com/nix-community/nix-direnv#via-home-manager
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
@@ -11,7 +11,7 @@
     docker
     coreutils
     ripgrep
-    nix
+    (import inputs.nixpkgs-latest { inherit system; }).nix
     fzf
     github-cli
     file
