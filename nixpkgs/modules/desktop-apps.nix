@@ -9,7 +9,8 @@ let
       sha256 = "1z980p3zmwmy29cdz2v8c36ywrybr7saw8n0w7wlb74m63zb9gpi";
     };
   });
-in {
+in
+{
   # programs.firefox.enable = true;
 
   home.packages = with pkgs; [
@@ -24,6 +25,8 @@ in {
     vlc
     audacity
     libreoffice
+    runelite
+    telepresence2
 
     steam
     xonotic
