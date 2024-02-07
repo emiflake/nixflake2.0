@@ -37,7 +37,7 @@
             ./modules/de.nix
             ./modules/desktop-apps.nix
             ./modules/nixpkgs.nix
-            ./modules/user-theme
+            ./modules/user-theme.nix
             ./modules/emacs.nix
           ];
         };
@@ -63,7 +63,7 @@
             ./modules/de.nix
             ./modules/desktop-apps.nix
             ./modules/nixpkgs.nix
-            ./modules/user-theme
+            ./modules/user-theme.nix
             ./modules/emacs.nix
           ];
         };
@@ -84,7 +84,7 @@
             ./modules/neovim.nix
             ./modules/git.nix
             ./modules/nixpkgs.nix
-            ./modules/user-theme
+            ./modules/user-theme.nix
           ];
         };
         fidelity = inputs.home-manager.lib.homeManagerConfiguration rec {

@@ -4,5 +4,6 @@
 !nixpkgs
 !.gitignore
 !README.md
+!nixos
 
 netrc
