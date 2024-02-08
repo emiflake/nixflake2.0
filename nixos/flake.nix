@@ -13,10 +13,7 @@
     nixosConfigurations = {
       "nextflake" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          ./modules/fonts.nix
-        ];
+        modules = [ ./installs/desktop-7950x.nix ];
       };
     };
   };
