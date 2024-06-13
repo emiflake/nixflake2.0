@@ -32,6 +32,11 @@ in
       vim-nix
       ctrlp
       {
+        plugin = telescope-nvim;
+        config = ''
+        '';
+      }
+      {
         plugin = onedark-vim;
         config = ''
           colo onedark
@@ -45,6 +50,7 @@ in
       gitgutter
       fugitive
       airline
+      targets-vim
       {
         plugin = vim-airline;
         config = ''
@@ -121,6 +127,12 @@ in
 
       vmap <leader>ca <Plug>(coc-codeaction-selected)
       nmap <leader>ca <Plug>(coc-codeaction-cursor)
+
+      nnoremap <leader>pf <cmd>Telescope find_files<cr>
+      nnoremap <leader>/ <cmd>Telescope live_grep<cr>
+      nnoremap <leader>bb <cmd>Telescope buffers<cr>
+      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 
       " autocmd BufWritePre <buffer> call CocActionAsync('format')
       command! -nargs=0 Format :call CocActionAsync('format')

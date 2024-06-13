@@ -2,6 +2,7 @@
 !*.nix
 !nix
 !nixpkgs
+!home-manager
 !.gitignore
 !README.md
 !nixos

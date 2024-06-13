@@ -13,7 +13,8 @@
     configFile = {
       "bspwm/bspwmrc".text = ''
         #!/bin/sh
-        bspc monitor -d I II III IV V VI VII VIII IX X
+        xrandr --output DP-0 --primary
+        bspc monitor \^1 -d I II III IV V VI VII VIII IX X
         bspc config border_width         0
         bspc config window_gap           48
         bspc config split_ratio          0.52

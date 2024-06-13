@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  enableSigning = false;
+  enableSigning = true;
 
   defaultGitConfig = {
     init.defaultBranch = "main";
@@ -14,19 +14,11 @@ let
     # https://github.com/github/feedback/discussions/7744#discussioncomment-1794438.
   } // (if enableSigning then
     {
-      gpg = {
-        format = "ssh";
-        program = "${pkgs.gnupg22}/bin/gpg";
-        ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-      };
-
-      # user.signingKey = "${builtins.readFile ~/.ssh/id_ed25519.pub}";
+      user.signingKey = "F97B83CDDAF96F60";
 
       commit.gpgsign = true;
     } else { });
-
 in
-
 {
   programs.git =
     {
@@ -48,7 +40,7 @@ in
           contents = defaultGitConfig // {
             user = defaultGitConfig.user // {
               name = "Emily Martins";
-              email = "emily@liqwid.finance";
+              email = "emi@haskell.fyi";
             };
           };
         }

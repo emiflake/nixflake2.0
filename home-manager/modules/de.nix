@@ -21,7 +21,8 @@
     let
       bspwmrc = pkgs.writeText "bspwmrc" ''
         #!/bin/sh
-        bspc monitor -d I II III IV V VI VII VIII IX X
+        xrandr --output DP-0 --primary
+        bspc monitor \^1 -d I II III IV V VI VII VIII IX X
         bspc config border_width         0
         bspc config window_gap           48
         bspc config split_ratio          0.52
@@ -32,13 +33,14 @@
     in
     ''
       echo "de.nix startup procedure"
+      xrandr --output DP-0 --primary
       ${config.services.sxhkd.package}/bin/sxhkd &
-      xsetroot -cursor_name left_ptr &
-      ${pkgs.feh}/bin/feh --bg-fill "${../assets/doom-themed-wallpaper-red.png}" &
-      ${config.services.polybar.package}/bin/polybar default &
+      xsetroot -cursor_name left_ptr & 
+      ${pkgs.feh}/bin/feh --bg-fill "${../assets/wallpaper-light-rabbit.png}" &
       # This version actually works :)
-      ${pkgs.picom}/bin/picom --shadow --vsync &
+      ${pkgs.picom}/bin/picom --vsync --shadow --shadow-radius 20 --shadow-opacity 0.2 --inactive-opacity 0.9  --blur-background --blur-size 2 --blur-method box --blur-strength 2 &
       sleep 1 && sh ${bspwmrc} &
+      ${config.services.polybar.package}/bin/polybar default &
       exec ${config.xsession.windowManager.bspwm.package}/bin/bspwm
     '';
 }

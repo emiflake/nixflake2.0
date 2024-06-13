@@ -3,11 +3,13 @@
   programs.kitty =
     {
       enable = true;
-      font.name = "PragmataPro Mono Liga";
+      font.name = "PixelCode Regular";
 
       settings = {
-        font_size = 18;
-        window_padding_width = 20;
+        font_size = 14;
+        window_padding_width = 10;
+        padding_left = 0;
+        padding_top = 0;
         confirm_os_window_close = 0;
         enable_audio_bell = false;
       };

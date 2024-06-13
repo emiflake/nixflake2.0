@@ -18,7 +18,9 @@
     cachix
     notmuch
     offlineimap
+    ispell
     nixpkgs-fmt
+    xclip
   ];
 
   home.file = {
