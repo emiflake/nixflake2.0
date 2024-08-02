@@ -38,7 +38,7 @@
       xsetroot -cursor_name left_ptr & 
       ${pkgs.feh}/bin/feh --bg-fill "${../assets/wallpaper-light-rabbit.png}" &
       # This version actually works :)
-      ${pkgs.picom}/bin/picom --vsync --shadow --shadow-radius 20 --shadow-opacity 0.2 --inactive-opacity 0.9  --blur-background --blur-size 2 --blur-method box --blur-strength 2 &
+      ${pkgs.picom}/bin/picom --vsync --shadow --shadow-radius 20 --shadow-opacity 0.2 --blur-background --blur-size 2 --blur-method box --blur-strength 2 &
       sleep 1 && sh ${bspwmrc} &
       ${config.services.polybar.package}/bin/polybar default &
       exec ${config.xsession.windowManager.bspwm.package}/bin/bspwm

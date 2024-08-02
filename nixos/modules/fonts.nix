@@ -15,5 +15,6 @@
     /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataProR_0830.ttf
     /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataProR_liga_0830.ttf
     /home/emi/.config/nixos/fonts/PixelCode
+    /home/emi/.config/nixos/fonts
   ];
 }

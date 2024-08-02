@@ -1,9 +1,9 @@
-{ config, pkgs, inputs, libs, ... }: {
+{ pkgs, inputs, ... }: {
   # https://github.com/nix-community/nix-direnv#via-home-manager
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.direnv.enableFishIntegration = false;
-
+    
   home.packages = with pkgs; [
     wget
     du-dust
@@ -13,6 +13,7 @@
     ripgrep
     (import inputs.nixpkgs-latest { inherit system; }).nix
     fzf
+    nil # Nix LSP
     github-cli
     file
     cachix

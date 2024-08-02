@@ -8,7 +8,7 @@ let
         "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
       sha256 = "1z980p3zmwmy29cdz2v8c36ywrybr7saw8n0w7wlb74m63zb9gpi";
     };
-  });
+  }); 
 in
 {
   # programs.firefox.enable = true;
@@ -24,6 +24,7 @@ in
     pavucontrol
     vlc
     audacity
+    (import inputs.nixpkgs-latest { inherit system; }).signal-desktop
     libreoffice
     runelite
     telepresence2
