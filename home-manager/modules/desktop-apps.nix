@@ -27,19 +27,19 @@ in
     (import inputs.nixpkgs-latest { inherit system; }).signal-desktop
     libreoffice
     runelite
+    obsidian
     telepresence2
-    (inputs.plover-flake.packages.${system}.plover.with-plugins (ps:
-      [
-        ps.plover_stitching
-        ps.plover_dict_commands
-        ps.plover_last_translation
-        ps.plover-modal-dictionary
-        ps.plover_python_dictionary
-        ps.plover_retro_surround
-      ]
-    ))
+    # (inputs.plover-flake.packages.${system}.plover.with-plugins (ps:
+    #   [
+    #     ps.plover_stitching
+    #     ps.plover_dict_commands
+    #     ps.plover_last_translation
+    #     ps.plover-modal-dictionary
+    #     ps.plover_python_dictionary
+    #     ps.plover_retro_surround
+    #   ]
+    # ))
     kleopatra
-
     steam
     xonotic
     (import ../cpma.nix { inherit pkgs; })

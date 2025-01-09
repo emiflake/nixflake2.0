@@ -1,6 +1,6 @@
 /*
+!nvim/
 !*.nix
-!nix
 !nixpkgs
 !home-manager
 !.gitignore

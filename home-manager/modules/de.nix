@@ -21,7 +21,6 @@
     let
       bspwmrc = pkgs.writeText "bspwmrc" ''
         #!/bin/sh
-        xrandr --output DP-0 --primary
         bspc monitor \^1 -d I II III IV V VI VII VIII IX X
         bspc config border_width         0
         bspc config window_gap           48
@@ -33,7 +32,7 @@
     in
     ''
       echo "de.nix startup procedure"
-      xrandr --output DP-0 --primary
+      xrandr --output DP-2 --primary --mode 2560x1440 --output HDMI-0 --mode 2560x1440 --pos 2560x0
       ${config.services.sxhkd.package}/bin/sxhkd &
       xsetroot -cursor_name left_ptr & 
       ${pkgs.feh}/bin/feh --bg-fill "${../assets/wallpaper-light-rabbit.png}" &

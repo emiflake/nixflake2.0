@@ -8,7 +8,9 @@
     "slack"
     "spotify"
     "spotify-unwrapped"
+    "steam-unwrapped"
     "steam"
     "steam-original"
+    "obsidian"
   ];
 }

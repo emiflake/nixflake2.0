@@ -26,116 +26,116 @@ in
     withNodeJs = true;
     withRuby = true;
     package = pkgs.neovim-unwrapped;
-    plugins = with pkgs.vimPlugins; [
-      yankring
-      nvim-lspconfig
-      vim-nix
-      ctrlp
-      {
-        plugin = telescope-nvim;
-        config = ''
-        '';
-      }
-      {
-        plugin = onedark-vim;
-        config = ''
-          colo onedark
-        '';
-      }
-      {
-        plugin = unison;
-      }
-      dhall-vim
-      vim-nix
-      gitgutter
-      fugitive
-      airline
-      targets-vim
-      {
-        plugin = vim-airline;
-        config = ''
-          let g:airline#extensions#tabline#enabled = 1
-          let g:airline_left_sep = ''
-          let g:airline_right_sep = ''
-        '';
-      }
-      {
-        plugin = vim-ormolu;
-        config = ''
-          let g:ormolu_command="fourmolu"
-          let g:ormolu_options=["-o -XTypeApplications -o -XOverloadedRecordDot"]
-          let g:ormolu_suppress_stderr=1
-        '';
-      }
-      vim-airline-themes
-    ];
+    # plugins = with pkgs.vimPlugins; [
+    #   yankring
+    #   nvim-lspconfig
+    #   vim-nix
+    #   ctrlp
+    #   {
+    #     plugin = telescope-nvim;
+    #     config = ''
+    #     '';
+    #   }
+    #   {
+    #     plugin = onedark-vim;
+    #     config = ''
+    #       colo onedark
+    #     '';
+    #   }
+    #   {
+    #     plugin = unison;
+    #   }
+    #   dhall-vim
+    #   vim-nix
+    #   gitgutter
+    #   fugitive
+    #   airline
+    #   targets-vim
+    #   {
+    #     plugin = vim-airline;
+    #     config = ''
+    #       let g:airline#extensions#tabline#enabled = 1
+    #       let g:airline_left_sep = ''
+    #       let g:airline_right_sep = ''
+    #     '';
+    #   }
+    #   {
+    #     plugin = vim-ormolu;
+    #     config = ''
+    #       let g:ormolu_command="fourmolu"
+    #       let g:ormolu_options=["-o -XTypeApplications -o -XOverloadedRecordDot"]
+    #       let g:ormolu_suppress_stderr=1
+    #     '';
+    #   }
+    #   vim-airline-themes
+    # ];
 
-    coc = {
-      enable = true;
-      package = pkgs.vimPlugins.coc-nvim;
-      settings = {
-        "suggest.noselect" = true;
-        "suggest.enablePreview" = true;
-        "suggest.enablePreselect" = false;
-        "suggest.disableKind" = true;
-        "coc.preferences.formatOnSaveFiletypes" = [ "nix" ];
+    # coc = {
+    #   enable = true;
+    #   package = pkgs.vimPlugins.coc-nvim;
+    #   settings = {
+    #     "suggest.noselect" = true;
+    #     "suggest.enablePreview" = true;
+    #     "suggest.enablePreselect" = false;
+    #     "suggest.disableKind" = true;
+    #     "coc.preferences.formatOnSaveFiletypes" = [ "nix" ];
 
-        languageserver = {
-          nix = {
-            command = "${inputs.rnix-lsp.defaultPackage.${system}}/bin/rnix-lsp";
-            filetypes = [
-              "nix"
-            ];
-          };
-          dhall = {
-            command = "dhall-lsp-server";
-            filetypes = [
-              "dhall"
-            ];
-          };
-          unison = {
-            filetypes = [ "unison" ];
-            host = "127.0.0.1";
-            port = 5757;
-          };
-          haskell = {
-            command = "haskell-language-server";
-            args = [ "--lsp" ];
-            rootPatterns = [
-              "*.cabal"
-              "stack.yaml"
-              "cabal.project"
-              "package.yaml"
-              "hie.yaml"
-            ];
-            filetypes = [ "haskell" "lhaskell" ];
-          };
-        };
-      };
-    };
+    #     languageserver = {
+    #       nix = {
+    #         command = "${inputs.rnix-lsp.defaultPackage.${system}}/bin/rnix-lsp";
+    #         filetypes = [
+    #           "nix"
+    #         ];
+    #       };
+    #       dhall = {
+    #         command = "dhall-lsp-server";
+    #         filetypes = [
+    #           "dhall"
+    #         ];
+    #       };
+    #       unison = {
+    #         filetypes = [ "unison" ];
+    #         host = "127.0.0.1";
+    #         port = 5757;
+    #       };
+    #       haskell = {
+    #         command = "haskell-language-server";
+    #         args = [ "--lsp" ];
+    #         rootPatterns = [
+    #           "*.cabal"
+    #           "stack.yaml"
+    #           "cabal.project"
+    #           "package.yaml"
+    #           "hie.yaml"
+    #         ];
+    #         filetypes = [ "haskell" "lhaskell" ];
+    #       };
+    #     };
+    #   };
+    # };
 
-    extraConfig = ''
-      let mapleader=","
-      set termguicolors
-      set t_Co=256
-      set number
-      set mouse=a
-      set clipboard+=unnamedplus
-      set tabstop=4
-      set shiftwidth=4
-      set expandtab
+    # extraConfig = ''
+    #   let mapleader=","
+    #   set termguicolors
+    #   set t_Co=256
+    #   set number
+    #   set mouse=a
+    #   set clipboard+=unnamedplus
+    #   set tabstop=4
+    #   set shiftwidth=4
+    #   set expandtab
 
-      vmap <leader>ca <Plug>(coc-codeaction-selected)
-      nmap <leader>ca <Plug>(coc-codeaction-cursor)
+    #   vmap <leader>ca <Plug>(coc-codeaction-selected)
+    #   nmap <leader>ca <Plug>(coc-codeaction-cursor)
 
-      nnoremap <leader>pf <cmd>Telescope find_files<cr>
-      nnoremap <leader>/ <cmd>Telescope live_grep<cr>
-      nnoremap <leader>bb <cmd>Telescope buffers<cr>
-      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+    #   nnoremap <leader>pf <cmd>Telescope find_files<cr>
+    #   nnoremap <leader>/ <cmd>Telescope live_grep<cr>
+    #   nnoremap <leader>bb <cmd>Telescope buffers<cr>
+    #   nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
-      " autocmd BufWritePre <buffer> call CocActionAsync('format')
-      command! -nargs=0 Format :call CocActionAsync('format')
-    '';
+    #   " autocmd BufWritePre <buffer> call CocActionAsync('format')
+    #   command! -nargs=0 Format :call CocActionAsync('format')
+    # '';
   };
 }
