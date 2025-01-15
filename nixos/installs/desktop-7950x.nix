@@ -1,12 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ../hardware/desktop-7950x.nix
-      ../modules/fonts.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ../hardware/desktop-7950x.nix
+    ../modules/fonts.nix
+  ];
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -15,7 +14,7 @@
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
-  boot.loader.grub.configurationLimit = 10;
+  boot.loader.grub.configurationLimit = 5;
 
   networking.hostName = "nextflake";
 
@@ -52,9 +51,7 @@
   };
   boot.initrd.kernelModules = [ "nvidia" ];
   services.xserver.videoDrivers = [ "nvidia" ];
-  boot.kernel.sysctl = {
-    "fs.inotify.max_user_watches" = "1048576";
-  };
+  boot.kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
   # hardware.opengl.extraPackages = with pkgs; [
   #   amdvlk
   # ];
@@ -115,9 +112,7 @@
     isNormalUser = true;
     description = "emi";
     extraGroups = [ "networkmanager" "wheel" "docker" "tty" "dialout" ];
-    packages = with pkgs; [
-      firefox
-    ];
+    packages = with pkgs; [ firefox ];
   };
 
   # Allow unfree packages
@@ -130,13 +125,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    curl
-    pinentry-curses
-  ];
+  environment.systemPackages = with pkgs; [ vim git wget curl pinentry-curses ];
 
   system.stateVersion = "23.11"; # Did you read the comment?
 

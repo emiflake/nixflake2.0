@@ -1,19 +1,15 @@
 { config, pkgs, libs, ... }:
 {
+
+  home.packages = with pkgs; [
+    bat
+  ];
+  programs.zoxide.enable = true;
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
     dotDir = ".config/zsh";
     plugins = [
-      {
-        name = "zsh-z";
-        src = pkgs.fetchFromGitHub {
-          owner = "agkozak";
-          repo = "zsh-z";
-          rev = "e138de57cd59ed09c3d55ff544ff8f79d2dc4ac1";
-          sha256 = "02b3r4bv8mz16xqngpi2353gv8fb478fwy10786i9j3ymp4hql5j";
-        };
-      }
       {
         name = "fzf-tab";
         src = pkgs.fetchFromGitHub {
@@ -34,6 +30,7 @@
         };
       }
     ];
+
     oh-my-zsh = {
       enable = true;
       theme = "eastwood";
@@ -41,15 +38,20 @@
     };
     initExtra = ''
       ZSH_DISABLE_COMPFIX="true"
+      export BAT_THEME=Coldark-Cold
       bindkey -v
       export EDITOR=${pkgs.neovim}/bin/nvim
       export TERM=xterm
+      enable-fzf-tab
+      export FZF_DEFAULT_OPTS='--color=light'
     '';
     shellAliases =
       let
         eza = "${pkgs.eza}/bin/eza";
       in
       {
+        cd = "z";
+        cat = "${pkgs.bat}/bin/bat -P --theme=Coldark-Cold";
         ls = eza;
         ll = eza;
         n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";

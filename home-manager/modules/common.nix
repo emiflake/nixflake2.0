@@ -13,6 +13,7 @@
     ripgrep
     (import inputs.nixpkgs-latest { inherit system; }).nix
     fzf
+    fd
     nil # Nix LSP
     github-cli
     file
@@ -22,6 +23,7 @@
     ispell
     nixpkgs-fmt
     xclip
+    tree-sitter
   ];
 
   home.file = {

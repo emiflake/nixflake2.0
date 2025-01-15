@@ -19,6 +19,11 @@ let
 in
 
 {
+  home.packages = [ 
+    inputs.rnix-lsp.defaultPackage.${system} 
+    pkgs.nixfmt
+    pkgs.efm-langserver
+  ];
   programs.neovim = {
     enable = true;
     vimAlias = true;
