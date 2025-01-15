@@ -40,7 +40,6 @@
             ./modules/desktop-apps.nix
             ./modules/nixpkgs.nix
             ./modules/user-theme.nix
-            ./modules/emacs.nix
           ];
         };
 
@@ -95,12 +94,11 @@
           modules = [
             {
               home = {
-                homeDirectory = "/Users/emiflake";
-                username = "emiflake";
+                homeDirectory = "/Users/emi";
+                username = "emi";
                 stateVersion = "22.11";
               };
             }
-            inputs.nix-doom-emacs.hmModule
             ./modules/home-manager.nix
             ./modules/common.nix
             ./modules/zsh.nix
