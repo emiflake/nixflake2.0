@@ -1,26 +1,34 @@
 { config, pkgs, libs, inputs, system, ... }:
 
 let
-  unison-git =
-    pkgs.fetchFromGitHub {
-      owner = "unisonweb";
-      repo = "unison";
-      rev = "e7023cd54b7f8cb2fc606f244607016e7776fdc2";
-      sha256 = "YTDQm86ccbHyeo4RHnmqKkJod1Bs4cY5KzGxVCusOpo=";
-    };
-  unison-src =
-    pkgs.runCommand "unison-src" { } '' 
-      cp -r ${unison-git}/editor-support/vim $out
-    '';
+  unison-git = pkgs.fetchFromGitHub {
+    owner = "unisonweb";
+    repo = "unison";
+    rev = "e7023cd54b7f8cb2fc606f244607016e7776fdc2";
+    sha256 = "YTDQm86ccbHyeo4RHnmqKkJod1Bs4cY5KzGxVCusOpo=";
+  };
+  unison-src = pkgs.runCommand "unison-src" { } ''
+    cp -r ${unison-git}/editor-support/vim $out
+  '';
   unison = pkgs.vimUtils.buildVimPlugin {
     name = "unison";
     src = unison-src;
   };
-in
 
-{
-  home.packages = [ 
-    inputs.rnix-lsp.defaultPackage.${system} 
+in {
+
+  systemd.user.services.ra-multiplex = {
+    Unit = { Description = "Persistent rust analyzer"; };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.ra-multiplex}/bin/ra-multiplex server";
+      Restart = "on-failure";
+      RestartSec = 1;
+    };
+  };
+
+  home.packages = [
+    inputs.rnix-lsp.defaultPackage.${system}
     pkgs.nixfmt
     pkgs.efm-langserver
   ];
@@ -137,7 +145,6 @@ in
     #   nnoremap <leader>/ <cmd>Telescope live_grep<cr>
     #   nnoremap <leader>bb <cmd>Telescope buffers<cr>
     #   nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
 
     #   " autocmd BufWritePre <buffer> call CocActionAsync('format')
     #   command! -nargs=0 Format :call CocActionAsync('format')

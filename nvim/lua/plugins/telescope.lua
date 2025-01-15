@@ -5,6 +5,9 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'folke/trouble.nvim' },
     opts = {
       pickers = {
+        colorscheme = {
+          enable_preview = true,
+        },
         buffers = {
           sort_mru = true,
         },
@@ -88,11 +91,19 @@ return {
         end,
         desc = 'Edit init.lua',
       },
+      {
+        '<leader>fC',
+        function()
+          require('telescope.builtin').colorscheme()
+        end,
+        desc = 'Find Colorscheme',
+      },
     },
   },
   {
     'nvim-telescope/telescope-file-browser.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+    command = 'Telescope file_browser',
   },
   {
     'jvgrootveld/telescope-zoxide',

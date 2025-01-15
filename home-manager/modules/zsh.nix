@@ -1,9 +1,6 @@
-{ config, pkgs, libs, ... }:
-{
+{ config, pkgs, libs, ... }: {
 
-  home.packages = with pkgs; [
-    bat
-  ];
+  home.packages = with pkgs; [ bat ];
   programs.zoxide.enable = true;
   programs.zsh = {
     enable = true;
@@ -38,25 +35,23 @@
     };
     initExtra = ''
       ZSH_DISABLE_COMPFIX="true"
-      export BAT_THEME=Coldark-Cold
       bindkey -v
+      export BAT_THEME=Coldark-Dark
       export EDITOR=${pkgs.neovim}/bin/nvim
       export TERM=xterm
       enable-fzf-tab
-      export FZF_DEFAULT_OPTS='--color=light'
+      export FZF_DEFAULT_OPTS='--color=dark'
     '';
-    shellAliases =
-      let
-        eza = "${pkgs.eza}/bin/eza";
-      in
-      {
-        cd = "z";
-        cat = "${pkgs.bat}/bin/bat -P --theme=Coldark-Cold";
-        ls = eza;
-        ll = eza;
-        n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
-        nm = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/master.zip -p";
-        nr = "nix run";
-      };
+    shellAliases = let eza = "${pkgs.eza}/bin/eza";
+    in {
+      cd = "z";
+      cat = "${pkgs.bat}/bin/bat -P --theme=Coldark-Dark";
+      ls = eza;
+      ll = eza;
+      n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
+      nm =
+        "NIXPKGS_ALLOW_UNFREE=1 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/master.zip -p";
+      nr = "nix run";
+    };
   };
 }

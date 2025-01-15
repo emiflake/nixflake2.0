@@ -6,5 +6,6 @@ return {
       opts.servers.rnix = {}
       opts.servers.efm.settings.languages.nix = { require('efmls-configs.formatters.nixfmt') }
     end,
+    ft = 'nix',
   },
 }
