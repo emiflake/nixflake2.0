@@ -1,3 +1,5 @@
+require('neovide')
+
 require('config.lazy')
 
 vim.schedule(function()

@@ -1,21 +1,18 @@
 {
-  description = "nvim-conf";
+  description = "nvim config";
 
-  inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
+  inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ];
-      systems =
-        [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        devShells.default = pkgs.mkShell {
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
+
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in rec {
+        devShell = pkgs.mkShell {
+          name = "dev shell";
           buildInputs =
             [ pkgs.lua-language-server pkgs.stylua pkgs.luajit pkgs.git ];
         };
-      };
-    };
+      });
 }

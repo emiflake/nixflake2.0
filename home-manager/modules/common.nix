@@ -1,9 +1,11 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, system, ... }: {
   # https://github.com/nix-community/nix-direnv#via-home-manager
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-  programs.direnv.enableFishIntegration = false;
-    
+  programs.direnv.enableZshIntegration = true;
+  # programs.direnv.nix-direnv.package =
+  #   (import inputs.nixpkgs-latest { inherit system; }).nix-direnv;
+
   home.packages = with pkgs; [
     wget
     du-dust

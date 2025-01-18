@@ -17,6 +17,15 @@
         };
       }
       {
+        name = "zsh-fzf-history-search";
+        src = pkgs.fetchFromGitHub {
+          owner = "joshskidmore";
+          repo = "zsh-fzf-history-search";
+          rev = "d5a9730b5b4cb0b39959f7f1044f9c52743832ba";
+          sha256 = "sha256-tQqIlkgIWPEdomofPlmWNEz/oNFA1qasILk4R5RWobY=";
+        };
+      }
+      {
         name = "zsh-nix-shell";
         file = "nix-shell.plugin.zsh";
         src = pkgs.fetchFromGitHub {
@@ -36,6 +45,8 @@
     initExtra = ''
       ZSH_DISABLE_COMPFIX="true"
       bindkey -v
+
+      export PATH="$PATH:$HOME/.nix-profile/bin"
       export BAT_THEME=Coldark-Dark
       export EDITOR=${pkgs.neovim}/bin/nvim
       export TERM=xterm
@@ -48,6 +59,7 @@
       cat = "${pkgs.bat}/bin/bat -P --theme=Coldark-Dark";
       ls = eza;
       ll = eza;
+      vim = "nvim";
       n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
       nm =
         "NIXPKGS_ALLOW_UNFREE=1 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/master.zip -p";
