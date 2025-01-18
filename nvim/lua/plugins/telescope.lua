@@ -13,6 +13,7 @@ return {
         },
       },
     },
+    lazy = false,
     keys = {
       {
         '<leader>ff',
