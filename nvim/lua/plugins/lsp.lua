@@ -138,7 +138,9 @@ return {
             })
           end,
           settings = {
-            Lua = {},
+            Lua = {
+              hint = { enable = true },
+            },
           },
         },
         hls = {
@@ -183,18 +185,7 @@ return {
     end,
   },
   {
-    'j-hui/fidget.nvim',
-    event = 'VeryLazy',
-    opts = {
-      notification = { window = { normal_hl = 'Normal' } },
-      integration = {
-        ['nvim-tree'] = {
-          enable = false,
-        },
-        ['xcodebuild-nvim'] = {
-          enable = false,
-        },
-      },
-    },
+    'SmiteshP/nvim-navic',
+    dependencies = { 'neovim/nvim-lspconfig' },
   },
 }

@@ -16,7 +16,7 @@ let
   } // (if enableSigning then {
     user.signingKey = "F97B83CDDAF96F60";
 
-    commit.gpgsign = true;
+    commit.gpgsign = false;
   } else
     { });
 in {
