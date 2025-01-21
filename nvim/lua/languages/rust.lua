@@ -16,7 +16,19 @@ return {
       }
     end,
   },
-  { 'mrcjkb/rustaceanvim', lazy = false },
+  {
+    'mrcjkb/rustaceanvim',
+    lazy = false,
+    keys = {
+      {
+        '<leader>gM',
+        function()
+          vim.cmd('RustLsp expandMacro')
+        end,
+        desc = '[G]enerate [M]acro',
+      },
+    },
+  },
   {
     'saecki/crates.nvim',
     dependencies = { 'saghen/blink.compat', opts = { impersonate_nvim_cmp = true } },

@@ -27,25 +27,4 @@ return {
     },
     opts_extend = { 'sources.default' },
   },
-  {
-    'echasnovski/mini.snippets',
-    config = function()
-      local gen_loader = require('mini.snippets').gen_loader
-      require('mini.snippets').setup({
-        snippets = {
-          gen_loader.from_file('~/.config/nvim/snippets/global.json'),
-        },
-      })
-    end,
-  },
-  {
-    'saghen/blink.cmp',
-    dependencies = 'echasnovski/mini.snippets',
-    opts = {
-      snippets = { preset = 'mini_snippets' },
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
-    },
-  },
 }
