@@ -1,6 +1,5 @@
 # The bspwm window manager home-manager module
-{ lib, config, pkgs, ... }:
-{
+{ lib, config, pkgs, ... }: {
   xsession = {
     enable = true;
     # windowManager.command = "${config.xsession.windowManager.bspwm.package}/bin/bspwm";
@@ -25,7 +24,4 @@
     };
   };
 }
-
-
-
 

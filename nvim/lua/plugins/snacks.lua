@@ -17,9 +17,6 @@ return {
         win = { style = 'input' },
         expand = true,
       },
-      git = {
-        enabled = true,
-      },
       quickfile = { enabled = true },
       gitbrowse = { enabled = true },
       statuscolumn = { enabled = true },

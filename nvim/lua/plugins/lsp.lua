@@ -74,11 +74,16 @@ end
 
 return {
   {
+    'saecki/live-rename.nvim',
+    keys = {
+      { '<leader>gr', function() require('live-rename').rename() end, desc = '[G]o [R]ename symbol' },
+    },
+  },
+  {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPost', 'BufNewFile' },
     dependencies = { 'creativenull/efmls-configs-nvim', 'saghen/blink.cmp' },
     keys = {
-      { '<leader>gr', vim.lsp.buf.rename, desc = '[G]o [R]ename symbol' },
       {
         '<leader>gf',
         function()
