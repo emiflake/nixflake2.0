@@ -31,13 +31,6 @@ return {
         desc = '[G]it [B]rowse',
       },
       {
-        '<leader>gB',
-        function()
-          require('snacks').git.blame_line()
-        end,
-        desc = '[G]it [B]lame',
-      },
-      {
         '<leader>tt',
         function()
           require('snacks').terminal.toggle()

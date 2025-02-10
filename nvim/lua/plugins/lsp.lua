@@ -76,7 +76,13 @@ return {
   {
     'saecki/live-rename.nvim',
     keys = {
-      { '<leader>gr', function() require('live-rename').rename() end, desc = '[G]o [R]ename symbol' },
+      {
+        '<leader>gr',
+        function()
+          require('live-rename').rename()
+        end,
+        desc = '[G]o [R]ename symbol',
+      },
     },
   },
   {
@@ -124,6 +130,7 @@ return {
           },
         },
         zls = {},
+        ts_ls = {},
         -- rust_analyzer = {},
         lua_ls = {
           on_init = function(client)
@@ -190,7 +197,28 @@ return {
     end,
   },
   {
-    'SmiteshP/nvim-navic',
-    dependencies = { 'neovim/nvim-lspconfig' },
+    'hedyhli/outline.nvim',
+    keys = {
+      { '<leader>lo', mode = { 'n' }, '<cmd>Outline<CR>', desc = 'Toggle Outline' },
+    },
+    opts = {},
+  },
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+      require('lspsaga').setup({
+        ui = {
+          lightbulb = {
+            enable = false,
+            enable_in_insert = false,
+          },
+          code_action = '',
+        },
+      })
+    end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter', -- optional
+      'nvim-tree/nvim-web-devicons', -- optional
+    },
   },
 }

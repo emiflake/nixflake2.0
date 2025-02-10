@@ -17,3 +17,36 @@ vim.keymap.set({ 'n', 'v' }, '<leader>z', function()
 end, { desc = 'Treesitter search and replace' })
 
 vim.api.nvim_set_keymap('i', '<C-Enter>', '<C-y>', {})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'PlenaryTestPopup',
+    'help',
+    'lspinfo',
+    'man',
+    'notify',
+    'Outline',
+    'qf',
+    'query',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
+    'neotest-output',
+    'checkhealth',
+    'neotest-summary',
+    'neotest-output-panel',
+    'toggleterm',
+    'neo-tree',
+    'gitsigns-blame',
+    'AvanteAsk',
+    'AvanteInput',
+    'markdown',
+  },
+  callback = function(event)
+    local bo = vim.bo[event.buf]
+    if bo.filetype ~= 'markdown' or bo.buftype == 'help' then
+      bo.buflisted = false
+      vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+    end
+  end,
+})
