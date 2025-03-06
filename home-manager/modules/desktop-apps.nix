@@ -8,9 +8,8 @@ let
         "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
       sha256 = "1z980p3zmwmy29cdz2v8c36ywrybr7saw8n0w7wlb74m63zb9gpi";
     };
-  }); 
-in
-{
+  });
+in {
   # programs.firefox.enable = true;
 
   home.packages = with pkgs; [
@@ -29,6 +28,7 @@ in
     runelite
     obsidian
     telepresence2
+    chromium
     # (inputs.plover-flake.packages.${system}.plover.with-plugins (ps:
     #   [
     #     ps.plover_stitching

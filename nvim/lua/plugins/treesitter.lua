@@ -69,6 +69,7 @@ return {
         'rst',
         'markdown',
         'markdown_inline',
+        'typst',
         -- git
         'git_config',
         'git_rebase',

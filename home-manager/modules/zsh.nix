@@ -56,7 +56,7 @@
     shellAliases = let eza = "${pkgs.eza}/bin/eza";
     in {
       cd = "z";
-      cat = "${pkgs.bat}/bin/bat -P --theme=Coldark-Dark";
+      cat = "${pkgs.bat}/bin/bat -P --theme=Coldark-Dark --decorations=never";
       ls = eza;
       ll = eza;
       vim = "nvim";

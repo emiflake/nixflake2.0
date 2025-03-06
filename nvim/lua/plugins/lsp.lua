@@ -131,6 +131,7 @@ return {
         },
         zls = {},
         ts_ls = {},
+        eslint = {},
         -- rust_analyzer = {},
         lua_ls = {
           on_init = function(client)

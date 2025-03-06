@@ -1,6 +1,7 @@
 return {
   {
     'nvim-neotest/neotest',
+    lazy = false,
     keys = {
       {
         '<leader>gt',
@@ -8,6 +9,20 @@ return {
           require('neotest').run.run()
         end,
         desc = 'Run tests',
+      },
+      {
+        '<leader>tt',
+        function()
+          require('neotest').output.open({ enter = true, quit_on_focus_loss = true })
+        end,
+        desc = 'Show output',
+      },
+      {
+        '<leader>tT',
+        function()
+          require('neotest').summary.toggle()
+        end,
+        desc = 'Toggle summary',
       },
     },
     dependencies = {
