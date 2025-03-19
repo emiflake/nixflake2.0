@@ -1,31 +1,79 @@
 return {
-  enabled = os.getenv('NVIM_DEV') == nil,
-  'supermaven-inc/supermaven-nvim',
-  event = 'InsertEnter',
-  opts = {
-    keymaps = {
-      accept_suggestion = '<C-M-Enter>',
+  {
+    enabled = os.getenv('NVIM_DEV') == nil,
+    'supermaven-inc/supermaven-nvim',
+    event = 'InsertEnter',
+    opts = {
+      keymaps = {
+        accept_suggestion = '<C-M-Enter>',
+      },
+      color = {
+        -- TODO: use onedark.nvim
+        suggestion_color = '#585b70',
+      },
+      log_level = 'off',
     },
-    color = {
-      -- TODO: use onedark.nvim
-      suggestion_color = '#585b70',
+    keys = {
+      {
+        '<leader>ts',
+        function()
+          local suggestion = require('supermaven-nvim.completion_preview')
+          if suggestion.disable_inline_completion then
+            suggestion.disable_inline_completion = false
+            print('Enabled Supermaven')
+          else
+            suggestion.disable_inline_completion = true
+            print('Disabled Supermaven')
+          end
+        end,
+        desc = '[T]oggle [S]upermaven',
+      },
     },
-    log_level = 'off',
   },
-  keys = {
-    {
-      '<leader>ts',
-      function()
-        local suggestion = require('supermaven-nvim.completion_preview')
-        if suggestion.disable_inline_completion then
-          suggestion.disable_inline_completion = false
-          print('Enabled Supermaven')
-        else
-          suggestion.disable_inline_completion = true
-          print('Disabled Supermaven')
-        end
-      end,
-      desc = '[T]oggle [S]upermaven',
+  {
+    'yetone/avante.nvim',
+    event = 'VeryLazy',
+    version = false,
+    opts = {
+      provider = 'claude',
+      claude = {
+        endpoint = 'https://api.anthropic.com',
+        model = 'claude-3-5-sonnet-20241022',
+        temperature = 0,
+        max_tokens = 4096,
+      },
+    },
+    build = 'make',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      --- Optional dependencies
+      'nvim-telescope/telescope.nvim', -- for file selector
+      'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
+      'nvim-tree/nvim-web-devicons', -- for file icons
+      {
+        'HakonHarnes/img-clip.nvim',
+        event = 'VeryLazy',
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { 'markdown', 'Avante' },
+        },
+        ft = { 'markdown', 'Avante' },
+      },
     },
   },
 }

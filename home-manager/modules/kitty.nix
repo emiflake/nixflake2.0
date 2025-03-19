@@ -23,7 +23,7 @@
     };
 
     extraConfig = ''
-      include Duskfox.conf
+      include Dayfox.conf
     '';
   };
 }

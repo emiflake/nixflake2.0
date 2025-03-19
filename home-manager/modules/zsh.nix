@@ -43,20 +43,22 @@
       plugins = [ "git" ];
     };
     initExtra = ''
+      source ~/.extra.zsh
+
       ZSH_DISABLE_COMPFIX="true"
       bindkey -v
 
       export PATH="$PATH:$HOME/.nix-profile/bin"
-      export BAT_THEME=Coldark-Dark
+      export BAT_THEME=gruvbox-light
       export EDITOR=${pkgs.neovim}/bin/nvim
-      export TERM=xterm
+      # export TERM=xterm
       enable-fzf-tab
-      export FZF_DEFAULT_OPTS='--color=dark'
+      export FZF_DEFAULT_OPTS='--color=light'
     '';
     shellAliases = let eza = "${pkgs.eza}/bin/eza";
     in {
       cd = "z";
-      cat = "${pkgs.bat}/bin/bat -P --theme=Coldark-Dark --decorations=never";
+      cat = "${pkgs.bat}/bin/bat -P --theme=gruvbox-light --decorations=never";
       ls = eza;
       ll = eza;
       vim = "nvim";

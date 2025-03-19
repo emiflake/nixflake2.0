@@ -1,14 +1,7 @@
 # This module is responsible for desktop apps
 { config, pkgs, inputs, system, ... }:
 let
-  custom-discord = pkgs.discord.overrideAttrs (_: rec {
-    version = "0.0.22";
-    src = builtins.fetchTarball {
-      url =
-        "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-      sha256 = "1z980p3zmwmy29cdz2v8c36ywrybr7saw8n0w7wlb74m63zb9gpi";
-    };
-  });
+  custom-discord = pkgs.discord.overrideAttrs (_: rec { version = "0.0.22"; });
 in {
   # programs.firefox.enable = true;
 

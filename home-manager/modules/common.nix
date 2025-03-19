@@ -26,6 +26,7 @@
     nixpkgs-fmt
     xclip
     tree-sitter
+    oha
   ];
 
   home.file = {

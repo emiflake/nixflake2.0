@@ -28,6 +28,25 @@ return {
         desc = '[G]enerate [M]acro',
       },
     },
+    config = function()
+      vim.g.rustaceanvim = {
+        -- Plugin configuration
+        tools = {},
+        -- LSP configuration
+        server = {
+          default_settings = {
+            -- rust-analyzer language server configuration
+            ['rust-analyzer'] = {
+              cargo = {
+                features = 'all',
+              },
+            },
+          },
+        },
+        -- DAP configuration
+        dap = {},
+      }
+    end,
   },
   {
     'saecki/crates.nvim',
