@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, system, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -83,16 +83,21 @@
 
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
 
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
 
+  programs.hyprland = { enable = true; };
+  programs.hyprland.xwayland.enable = true;
+
   services.printing.enable = true;
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  # services.pipewire.wireplumber.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -100,6 +105,15 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
+  };
+
+  services.ollama = {
+    enable = true;
+    package = (import inputs.nixpkgs-master {
+      inherit system;
+      config.allowUnfree = true;
+    }).ollama;
+    acceleration = "cuda";
   };
 
   services.tailscale.enable = true;

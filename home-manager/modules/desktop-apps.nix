@@ -3,11 +3,14 @@
 let
   custom-discord = pkgs.discord.overrideAttrs (_: rec { version = "0.0.22"; });
 in {
-  # programs.firefox.enable = true;
+  programs.firefox.enable = true;
+
+  programs.tofi.enable = true;
 
   home.packages = with pkgs; [
-    firefox
-    custom-discord
+    # firefox
+    hyprpaper
+    vesktop
     slack
     spotify
     yubikey-personalization-gui

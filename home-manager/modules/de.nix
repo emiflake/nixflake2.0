@@ -9,6 +9,25 @@
     windowManager.command = "[[ -f ~/.profile ]] && . ~/.profile";
   };
 
+  home.packages = with pkgs; [ wl-clipboard ironbar waybar ];
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      ipc = "off";
+      splash = false;
+      preload = [ "/home/emi/Pictures/glacial.jpeg" ];
+
+      wallpaper = [
+        "DP-2,/home/emi/Pictures/glacial.jpeg"
+        "DP-5,/home/emi/Pictures/glacial.jpeg"
+        "HDMI-A-1,/home/emi/Pictures/glacial.jpeg"
+        "HDMI-A-2,/home/emi/Pictures/glacial.jpeg"
+      ];
+
+    };
+  };
+
   # This sort of patches everything together to make it magically work.
   home.file.".xinitrc".text = let
     bspwmrc = pkgs.writeText "bspwmrc" ''

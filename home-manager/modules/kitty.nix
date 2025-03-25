@@ -15,6 +15,7 @@
       scrollback_lines = 10000;
       repaint_delay = 5;
       sync_to_monitor = false;
+      background_opacity = 0.95;
     };
 
     keybindings = {
