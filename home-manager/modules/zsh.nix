@@ -49,16 +49,16 @@
       bindkey -v
 
       export PATH="$PATH:$HOME/.nix-profile/bin"
-      export BAT_THEME=gruvbox-light
+      export BAT_THEME=gruvbox-dark
       export EDITOR=${pkgs.neovim}/bin/nvim
       # export TERM=xterm
       enable-fzf-tab
-      export FZF_DEFAULT_OPTS='--color=light'
+      export FZF_DEFAULT_OPTS='--color=dark'
     '';
     shellAliases = let eza = "${pkgs.eza}/bin/eza";
     in {
       cd = "z";
-      cat = "${pkgs.bat}/bin/bat -P --theme=gruvbox-light --decorations=never";
+      cat = "${pkgs.bat}/bin/bat -P --theme=gruvbox-dark --decorations=never";
       ls = eza;
       ll = eza;
       vim = "nvim";

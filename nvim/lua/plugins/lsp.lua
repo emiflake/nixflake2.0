@@ -122,7 +122,9 @@ return {
           settings = {
             version = 2,
             rootMarkers = { '.git/' },
-            languages = {},
+            languages = {
+              haskell = {},
+            },
           },
           init_options = {
             documentFormatting = true,
@@ -132,26 +134,48 @@ return {
         zls = {},
         ts_ls = {},
         eslint = {},
+        ---@type vim.lsp.ClientConfig
         lua_ls = {
+          cmd = { 'lua-language-server' },
+          ---@param client vim.lsp.Client
           on_init = function(client)
+            local path = vim.split(package.path, ';')
+            table.insert(path, 'lua/?.lua')
+            table.insert(path, 'lua/?/init.lua')
+
             client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
               runtime = {
                 -- Tell the language server which version of Lua you're using
                 -- (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
+                path = path,
               },
+
+              telemetry = { enable = false },
               -- Make the server aware of Neovim runtime files
               workspace = {
                 checkThirdParty = false,
                 library = {
                   vim.env.VIMRUNTIME,
+                  vim.fn.expand('$HOME/.local/share/nvim/lazy/blink.cmp/lua/'),
+                  vim.fn.expand('$HOME/.local/share/nvim/lazy/avante.nvim/lua/'),
+                  vim.fn.expand('$HOME/.local/share/nvim/lazy/nvim-lspconfig/lua/'),
+                  vim.fn.stdpath('config'),
                 },
+                maxPreload = 100,
+                preloadFileSize = 1000,
+              },
+              completion = {
+                callSnippet = 'Replace',
               },
             })
           end,
           settings = {
             Lua = {
               hint = { enable = true },
+              diagnostics = {
+                globals = { 'vim' },
+              },
             },
           },
         },

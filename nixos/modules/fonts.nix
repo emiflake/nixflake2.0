@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
@@ -10,11 +9,11 @@
     mplus-outline-fonts.githubRelease
     dina-font
     proggyfonts
-    /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataPro_Mono_R_0830.ttf
-    /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataPro_Mono_R_liga_0830.ttf
-    /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataProR_0830.ttf
-    /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataProR_liga_0830.ttf
-    /home/emi/.config/nixos/fonts/PixelCode
-    /home/emi/.config/nixos/fonts
+    # /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataPro_Mono_R_0830.ttf
+    # /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataPro_Mono_R_liga_0830.ttf
+    # /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataProR_0830.ttf
+    # /home/emi/.config/nixos/fonts/PragmataPro-Regular0.830/PragmataProR_liga_0830.ttf
+    # /home/emi/.config/nixos/fonts/PixelCode
+    # /home/emi/.config/nixos/fonts
   ];
 }

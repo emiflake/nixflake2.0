@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, inputs, system, pkgs, ... }:
 
 {
   imports = [
@@ -20,6 +20,15 @@
 
   # networking.wireless.enable = true;
   services.pcscd.enable = true;
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 27504 ];
+    allowedUDPPortRanges = [{
+      from = 27504;
+      to = 27504;
+    }];
+  };
 
   programs.gnupg.agent = {
     enable = true;
@@ -59,6 +68,14 @@
   # hardware.opengl.extraPackages32 = with pkgs; [
   #   driversi686Linux.amdvlk
   # ];
+  services.ollama = {
+    enable = true;
+    package = (import inputs.nixpkgs-master {
+      inherit system;
+      config.allowUnfree = true;
+    }).ollama;
+    acceleration = "cuda";
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;

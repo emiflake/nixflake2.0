@@ -32,7 +32,7 @@ in {
     #     ps.plover_retro_surround
     #   ]
     # ))
-    kleopatra
+    libsForQt5.kleopatra
     steam
     xonotic
     (import ../cpma.nix { inherit pkgs; })

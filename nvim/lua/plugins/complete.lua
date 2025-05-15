@@ -3,6 +3,7 @@ return {
     'saghen/blink.cmp',
     dependencies = 'rafamadriz/friendly-snippets',
     version = '*',
+    ---@type blink.cmp.Config
     opts = {
       keymap = { preset = 'default' },
 
@@ -19,7 +20,7 @@ return {
         -- Display a preview of the selected item on the current line
         ghost_text = { enabled = true },
       },
-      signature = { enabled = false },
+      signature = { enabled = true },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },

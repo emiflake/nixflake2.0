@@ -1,8 +1,6 @@
 { lib, config, pkgs, ... }:
-let
-  spectacle = "${pkgs.spectacle}/bin/spectacle";
-in
-{
+let spectacle = "${pkgs.kdePackages.spectacle}/bin/spectacle";
+in {
   services.sxhkd = {
     enable = true;
     keybindings = {
@@ -37,7 +35,8 @@ in
         "bspc node -t {tiled,pseudo_tiled,floating,fullscreen}";
 
       # set the node flags
-      "super + ctrl + {m,x,y,z}" = "bspc node -g {marked,locked,sticky,private}";
+      "super + ctrl + {m,x,y,z}" =
+        "bspc node -g {marked,locked,sticky,private}";
 
       # focus the node in the given direction
       "super + {_,shift + }{Left,Down,Up,Right}" =
