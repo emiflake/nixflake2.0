@@ -1,3 +1,9 @@
+if vim.fn.exists('g:vscode') ~= 0 then
+  return {
+    {},
+  }
+end
+
 local choose_formatter = function()
   local cwd = vim.fn.getcwd()
   local has_biome = vim.fn.filereadable(cwd .. '/biome.json')

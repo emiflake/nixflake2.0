@@ -1,3 +1,9 @@
+if vim.fn.exists('g:vscode') ~= 0 then
+  return {
+    {},
+  }
+end
+
 return {
   {
     enabled = os.getenv('NVIM_DEV') == nil,
@@ -37,11 +43,15 @@ return {
     ---@type avante.Config
     opts = {
       provider = 'claude',
-      claude = {
-        endpoint = 'https://api.anthropic.com',
-        model = 'claude-3-5-sonnet-20241022',
-        temperature = 0,
-        max_tokens = 8192,
+      providers = {
+        claude = {
+          endpoint = 'https://api.anthropic.com',
+          model = 'claude-3-5-sonnet-20241022',
+          extra_request_body = {
+            max_tokens = 8192,
+            temperature = 0,
+          },
+        },
       },
     },
     build = 'make',
