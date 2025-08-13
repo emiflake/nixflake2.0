@@ -27,6 +27,7 @@
     xclip
     tree-sitter
     oha
+    nss
   ];
 
   home.file = {

@@ -23,12 +23,20 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 27504 ];
-    allowedUDPPortRanges = [{
-      from = 27504;
-      to = 27504;
-    }];
+    allowedTCPPorts = [ 27504 5173 ];
+    allowedUDPPortRanges = [
+      {
+        from = 27504;
+        to = 27504;
+      }
+      {
+        from = 5173;
+        to = 5173;
+      }
+    ];
   };
+
+  hardware.rasdaemon.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -51,14 +59,14 @@
     #   settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
     #   persistencedSha256 = pkgs.lib.fakeSha256;
     # };
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;
+    open = true;
     nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  boot.initrd.kernelModules = [ "nvidia" ];
+  # boot.initrd.kernelModules = [ "nvidia" ];
   services.xserver.videoDrivers = [ "nvidia" ];
   boot.kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
   # hardware.opengl.extraPackages = with pkgs; [
@@ -122,7 +130,17 @@
   services.tailscale.enable = true;
 
   programs.zsh.enable = true;
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    # Set up resource limits
+    daemon.settings = {
+      experimental = true;
+      default-address-pools = [{
+        base = "172.30.0.0/16";
+        size = 24;
+      }];
+    };
+  };
 
   users.users.emi = {
     shell = pkgs.zsh;

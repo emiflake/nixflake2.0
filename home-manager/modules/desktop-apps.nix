@@ -1,7 +1,12 @@
 # This module is responsible for desktop apps
 { config, pkgs, inputs, system, ... }:
 let
-  custom-discord = pkgs.discord.overrideAttrs (_: rec { version = "0.0.22"; });
+  custom-discord =
+    pkgs.discord; # .overrideAttrs (_: rec { version = "0.0.22"; });
+  prismlauncher-with-libs = pkgs.prismlauncher.override {
+    additionalLibs = [ pkgs.nss pkgs.nspr pkgs.libgbm ];
+  };
+
 in {
   # programs.firefox.enable = true;
 
@@ -10,7 +15,8 @@ in {
     custom-discord
     slack
     spotify
-    yubikey-personalization-gui
+    # yubikey-personalization-gui
+    # yubioath-flutter
     (import inputs.nixpkgs-pin1 { inherit system; }).yubioath-desktop
     ledger-live-desktop
     pavucontrol
@@ -32,9 +38,14 @@ in {
     #     ps.plover_retro_surround
     #   ]
     # ))
+    prismlauncher-with-libs
     libsForQt5.kleopatra
     steam
     xonotic
+    (import inputs.nixpkgs-latest {
+      inherit system;
+      config = { allowUnfree = true; };
+    }).code-cursor
     (import ../cpma.nix { inherit pkgs; })
   ];
 }
