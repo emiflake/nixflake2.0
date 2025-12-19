@@ -1,4 +1,10 @@
-{ config, pkgs, libs, ... }: {
+{
+  config,
+  pkgs,
+  libs,
+  ...
+}:
+{
 
   home.packages = with pkgs; [ bat ];
   programs.zoxide.enable = true;
@@ -54,18 +60,22 @@
       # export TERM=xterm
       enable-fzf-tab
       export FZF_DEFAULT_OPTS='--color=dark'
+
+      # export CARGO_HOME="/var/tmp/cargo-emi"
     '';
-    shellAliases = let eza = "${pkgs.eza}/bin/eza";
-    in {
-      cd = "z";
-      cat = "${pkgs.bat}/bin/bat -P --theme=gruvbox-dark --decorations=never";
-      ls = eza;
-      ll = eza;
-      vim = "nvim";
-      n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
-      nm =
-        "NIXPKGS_ALLOW_UNFREE=1 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/master.zip -p";
-      nr = "nix run";
-    };
+    shellAliases =
+      let
+        eza = "${pkgs.eza}/bin/eza";
+      in
+      {
+        cd = "z";
+        cat = "${pkgs.bat}/bin/bat -P --theme=gruvbox-dark --decorations=never";
+        ls = eza;
+        ll = eza;
+        vim = "nvim";
+        n = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -p";
+        nm = "NIXPKGS_ALLOW_UNFREE=1 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/master.zip -p";
+        nr = "nix run";
+      };
   };
 }

@@ -1,4 +1,10 @@
-{ config, inputs, system, pkgs, ... }:
+{
+  config,
+  inputs,
+  system,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -20,10 +26,14 @@
 
   # networking.wireless.enable = true;
   services.pcscd.enable = true;
+  services.udev.packages = [ pkgs.ledger-udev-rules ];
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 27504 5173 ];
+    allowedTCPPorts = [
+      27504
+      5173
+    ];
     allowedUDPPortRanges = [
       {
         from = 27504;
@@ -64,24 +74,28 @@
     powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
   # boot.initrd.kernelModules = [ "nvidia" ];
   services.xserver.videoDrivers = [ "nvidia" ];
-  boot.kernel.sysctl = { "fs.inotify.max_user_watches" = "1048576"; };
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = "1048576";
+  };
   # hardware.opengl.extraPackages = with pkgs; [
   #   amdvlk
   # ];
-  # # For 32 bit applications 
+  # # For 32 bit applications
   # hardware.opengl.extraPackages32 = with pkgs; [
   #   driversi686Linux.amdvlk
   # ];
   services.ollama = {
     enable = true;
-    package = (import inputs.nixpkgs-master {
-      inherit system;
-      config.allowUnfree = true;
-    }).ollama;
+    package =
+      (import inputs.nixpkgs-master {
+        inherit system;
+        config.allowUnfree = true;
+      }).ollama;
     acceleration = "cuda";
   };
 
@@ -135,10 +149,12 @@
     # Set up resource limits
     daemon.settings = {
       experimental = true;
-      default-address-pools = [{
-        base = "172.30.0.0/16";
-        size = 24;
-      }];
+      default-address-pools = [
+        {
+          base = "172.30.0.0/16";
+          size = 24;
+        }
+      ];
     };
   };
 
@@ -146,21 +162,40 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "emi";
-    extraGroups = [ "networkmanager" "wheel" "docker" "tty" "dialout" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "tty"
+      "dialout"
+    ];
     packages = with pkgs; [ firefox ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nix.trustedUsers = [ "root" "@wheel" ];
+  nix.trustedUsers = [
+    "root"
+    "@wheel"
+  ];
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" "ca-derivations" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+      "ca-derivations"
+    ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ vim git wget curl pinentry-curses ];
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    wget
+    curl
+    pinentry-curses
+  ];
 
   system.stateVersion = "23.11"; # Did you read the comment?
 

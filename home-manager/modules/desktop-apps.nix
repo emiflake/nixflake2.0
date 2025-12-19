@@ -39,7 +39,7 @@ in {
     #   ]
     # ))
     prismlauncher-with-libs
-    libsForQt5.kleopatra
+    # libsForQt5.kleopatra
     steam
     xonotic
     (import inputs.nixpkgs-latest {
