@@ -9,7 +9,7 @@ if vim.g.neovide then
   vim.g.direnv_cmd = vim.fn.expand('~/.nix-profile/bin/direnv')
 
   vim.g.neovide_refresh_rate = 480
-  vim.g.neovide_refrash_rate_idle = 30
+  vim.g.neovide_refresh_rate_idle = 30
 
   -- Make sure we start in nvim dir, because otherwise we will start in
   -- a windows dir.

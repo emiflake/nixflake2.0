@@ -1,7 +1,5 @@
-if vim.fn.exists('g:vscode') ~= 0 then
-  return {
-    {},
-  }
+if require('utils').is_vscode() then
+  return {}
 end
 
 return {
@@ -15,6 +13,7 @@ return {
   },
   {
     'nvim-neotest/neotest',
+    lazy = true,
     dependencies = { 'mrcjkb/rustaceanvim' },
     opts = function(_, opts)
       opts.adapters = {
@@ -24,7 +23,7 @@ return {
   },
   {
     'mrcjkb/rustaceanvim',
-    lazy = false,
+    lazy = true,
     keys = {
       {
         '<leader>gM',

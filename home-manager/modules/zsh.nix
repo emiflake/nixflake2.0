@@ -62,6 +62,9 @@
       export FZF_DEFAULT_OPTS='--color=dark'
 
       # export CARGO_HOME="/var/tmp/cargo-emi"
+
+      # If available
+      export PATH=/home/emi/.opencode/bin:$PATH
     '';
     shellAliases =
       let

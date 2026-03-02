@@ -1,7 +1,5 @@
-if vim.fn.exists('g:vscode') ~= 0 then
-  return {
-    {},
-  }
+if require('utils').is_vscode() then
+  return {}
 end
 
 -- Use LspAttach autocommand to only map the following keys
@@ -61,9 +59,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       return
     end
     vim.lsp.buf.format({
-      filter = function(client)
-        return client.name == 'efm'
-      end,
+      async = false,
     })
   end,
 })
@@ -100,9 +96,7 @@ return {
         '<leader>gf',
         function()
           vim.lsp.buf.format({
-            filter = function(client)
-              return client.name == 'efm'
-            end,
+            async = false,
           })
         end,
         desc = '[G]o [F]ormat',
@@ -140,6 +134,7 @@ return {
         zls = {},
         ts_ls = {},
         eslint = {},
+
         ---@type vim.lsp.ClientConfig
         lua_ls = {
           cmd = { 'lua-language-server' },
@@ -191,12 +186,12 @@ return {
       },
     },
     config = function(_, opts)
-      local lspconfig = require('lspconfig')
       for server, config in pairs(opts.servers) do
         -- passing config.capabilities to blink.cmp merges with the capabilities in your
         -- `opts[server].capabilities, if you've defined it
         config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-        lspconfig[server].setup(config)
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
       end
     end,
   },
@@ -248,7 +243,7 @@ return {
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter', -- optional
-      'nvim-tree/nvim-web-devicons', -- optional
+      'nvim-tree/nvim-web-devicons',     -- optional
     },
   },
 }

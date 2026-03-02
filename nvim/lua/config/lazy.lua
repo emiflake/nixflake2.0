@@ -22,25 +22,13 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 
-if vim.fn.exists('g:vscode') ~= 0 then
-  require('lazy').setup({
-    change_detection = { notify = false },
-    spec = {
-      -- import your plugins
-      { import = 'plugins' },
-      { import = 'languages' },
-    },
-    checker = { enabled = false },
-  })
-else
-  -- Setup lazy.nvim
-  require('lazy').setup({
-    change_detection = { notify = false },
-    spec = {
-      -- import your plugins
-      { import = 'plugins' },
-      { import = 'languages' },
-    },
-    checker = { enabled = true },
-  })
-end
+-- Setup lazy.nvim
+require('lazy').setup({
+  change_detection = { notify = false },
+  spec = {
+    -- import your plugins
+    { import = 'plugins' },
+    { import = 'languages' },
+  },
+  checker = { enabled = not require('utils').is_vscode() },
+})

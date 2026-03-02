@@ -1,7 +1,5 @@
-if vim.fn.exists('g:vscode') ~= 0 then
-  return {
-    {},
-  }
+if require('utils').is_vscode() then
+  return {}
 end
 
 return {

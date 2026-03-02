@@ -1,7 +1,5 @@
-if vim.fn.exists('g:vscode') ~= 0 then
-  return {
-    {},
-  }
+if require('utils').is_vscode() then
+  return {}
 end
 
 local choose_formatter = function()
@@ -14,6 +12,7 @@ end
 return {
   {
     'nvim-neotest/neotest',
+    lazy = true,
     dependencies = {
       'marilari88/neotest-vitest',
     },

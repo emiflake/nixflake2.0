@@ -1,8 +1,16 @@
 return {
-  'EdenEast/nightfox.nvim',
-  lazy = false,
-  priority = 1000,
-  config = function()
-    vim.cmd.colorscheme('duskfox')
-  end,
+  {
+    'bluz71/vim-moonfly-colors',
+    name = 'moonfly',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme('moonfly')
+    end,
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    lazy = false,
+    priority = 1000,
+  },
 }

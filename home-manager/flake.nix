@@ -5,8 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     nixpkgs-latest.url = "github:NixOS/nixpkgs/master";
     nixpkgs-21_11.url = "github:NixOS/nixpkgs/21.11";
-    nixpkgs-pin1.url =
-      "github:NixOS/nixpkgs?rev=c2e7745b08a303b468fcaced4bf0774900aba9bc";
+    nixpkgs-pin1.url = "github:NixOS/nixpkgs?rev=c2e7745b08a303b468fcaced4bf0774900aba9bc";
     nixpkgs-plover.url = "github:evils/nixpkgs/plover";
     # plover-flake.url = "/home/emi/dev/indev/plover-flake";
     home-manager.url = "github:nix-community/home-manager";
@@ -18,18 +17,31 @@
   };
 
   outputs = inputs: {
-    devShells = let
-      systems = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
-      forEachSystem = f:
-        builtins.listToAttrs (map (system: {
-          name = system;
-          value = f system;
-        }) systems);
-    in forEachSystem (system:
-      let pkgs = import inputs.nixpkgs { inherit system; };
-      in {
-        default = pkgs.mkShell { buildInputs = with pkgs; [ nixpkgs-fmt ]; };
-      });
+    devShells =
+      let
+        systems = [
+          "x86_64-linux"
+          "aarch64-darwin"
+          "x86_64-darwin"
+        ];
+        forEachSystem =
+          f:
+          builtins.listToAttrs (
+            map (system: {
+              name = system;
+              value = f system;
+            }) systems
+          );
+      in
+      forEachSystem (
+        system:
+        let
+          pkgs = import inputs.nixpkgs { inherit system; };
+        in
+        {
+          default = pkgs.mkShell { buildInputs = with pkgs; [ nixpkgs-fmt ]; };
+        }
+      );
     homeConfigurations = {
       nextflake = inputs.home-manager.lib.homeManagerConfiguration rec {
         pkgs = import inputs.nixpkgs { localSystem = "x86_64-linux"; };
@@ -133,4 +145,3 @@
     };
   };
 }
-

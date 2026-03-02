@@ -1,7 +1,5 @@
-if vim.fn.exists('g:vscode') ~= 0 then
-  return {
-    {},
-  }
+if require('utils').is_vscode() then
+  return {}
 end
 
 return {
@@ -11,10 +9,9 @@ return {
     event = 'InsertEnter',
     opts = {
       keymaps = {
-        accept_suggestion = '<C-M-Enter>',
+        accept_suggestion = '<Tab>',
       },
       color = {
-        -- TODO: use onedark.nvim
         suggestion_color = '#585b70',
       },
       log_level = 'off',
@@ -23,13 +20,13 @@ return {
       {
         '<leader>ts',
         function()
-          local suggestion = require('supermaven-nvim.completion_preview')
-          if suggestion.disable_inline_completion then
-            suggestion.disable_inline_completion = false
-            print('Enabled Supermaven')
-          else
-            suggestion.disable_inline_completion = true
+          local api = require('supermaven-nvim.api')
+          if api.is_running() then
+            api.stop()
             print('Disabled Supermaven')
+          else
+            api.start()
+            print('Enabled Supermaven')
           end
         end,
         desc = '[T]oggle [S]upermaven',
@@ -37,54 +34,78 @@ return {
     },
   },
   {
-    'yetone/avante.nvim',
-    event = 'VeryLazy',
-    version = false,
-    ---@type avante.Config
+    'folke/sidekick.nvim',
+    event = 'BufReadPost',
     opts = {
-      provider = 'claude',
-      providers = {
-        claude = {
-          endpoint = 'https://api.anthropic.com',
-          model = 'claude-3-5-sonnet-20241022',
-          extra_request_body = {
-            max_tokens = 8192,
-            temperature = 0,
-          },
+      cli = {
+        watch = true,       -- Explicitly enable file watching for CLI tool changes
+        mux = {
+          backend = 'tmux', -- Use zellij instead of old tmux
+          enabled = true,
+          create = 'split',
         },
       },
     },
-    build = 'make',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'stevearc/dressing.nvim',
-      'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-      --- Optional dependencies
-      'nvim-telescope/telescope.nvim', -- for file selector
-      'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
-      'nvim-tree/nvim-web-devicons', -- for file icons
+    keys = {
       {
-        'HakonHarnes/img-clip.nvim',
-        event = 'VeryLazy',
-        opts = {
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            use_absolute_path = true,
-          },
-        },
+        '<leader>at',
+        function()
+          require('sidekick.cli').toggle()
+        end,
+        desc = 'Sidekick Toggle',
+        mode = { 'n', 't', 'i', 'x' },
       },
       {
-        'MeanderingProgrammer/render-markdown.nvim',
-        ---@type render.md.UserConfig
-        opts = {
-          file_types = { 'markdown', 'Avante' },
-        },
-        ft = { 'markdown', 'Avante' },
+        '<leader>aa',
+        function()
+          require('sidekick.cli').toggle()
+        end,
+        desc = 'Sidekick Toggle CLI',
+      },
+      {
+        '<leader>as',
+        function()
+          require('sidekick.cli').select({ filter = { installed = true } })
+        end,
+        desc = 'Select CLI',
+      },
+      {
+        '<leader>ad',
+        function()
+          require('sidekick.cli').close()
+        end,
+        desc = 'Detach a CLI Session',
+      },
+      {
+        '<leader>ai',
+        function()
+          require('sidekick.cli').send({ msg = '{this}' })
+        end,
+        mode = { 'x', 'n' },
+        desc = 'Send This',
+      },
+      {
+        '<leader>af',
+        function()
+          require('sidekick.cli').send({ msg = '{file}' })
+        end,
+        desc = 'Send File',
+      },
+      {
+        '<leader>av',
+        function()
+          require('sidekick.cli').send({ msg = '{selection}' })
+        end,
+        mode = { 'x' },
+        desc = 'Send Visual Selection',
+      },
+      {
+        '<leader>ap',
+        function()
+          require('sidekick.cli').prompt()
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Sidekick Select Prompt',
       },
     },
   },

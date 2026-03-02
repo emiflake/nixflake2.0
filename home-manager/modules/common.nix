@@ -34,6 +34,7 @@
     tree-sitter
     oha
     nss
+    tmux
   ];
 
   home.file = {
